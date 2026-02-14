@@ -16,9 +16,11 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: 'stable' # Latest stable version
-
-      - name: Install go-release
-        run: go install github.com/goreleaser/goreleaser@latest
+      - name: update go level and update program level
+        run: |
+          go get -u
+          go mod tidy
+          
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
