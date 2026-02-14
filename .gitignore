@@ -4,3 +4,4 @@
 *.srt
 *.pt
 model_config.json
+.idea
