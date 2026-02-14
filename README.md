@@ -21,6 +21,7 @@ go build -o main main.go
 ```
 
 **参数说明：**
+
 - `--link`: 需要下载的视频链接列表文件路径（必填）
 - `--proxy`: 下载过程中使用的代理服务器
 - `--cookie`: 下载过程中需要的cookie文件路径
@@ -36,6 +37,7 @@ go build -o main main.go
 ```
 
 **参数说明：**
+
 - `--level`: 模型等级（默认: medium）
 - `--location`: 模型文件位置（默认: /data/models）
 - `--language`: 视频语言（默认: English）
@@ -53,6 +55,7 @@ go build -o main main.go
 ```
 
 **参数说明：**
+
 - `--root`: 原始字幕文件所在目录（默认: /data）
 - `--proxy`: 翻译过程中使用的代理服务器
 
@@ -67,6 +70,7 @@ go build -o main main.go
 ```
 
 **功能说明：**
+
 - 自动查找指定目录下的视频文件
 - 为每个视频文件寻找对应的.srt字幕文件
 - 使用FFmpeg将字幕内嵌到视频中（编码为H.265/AAC格式）
@@ -74,6 +78,7 @@ go build -o main main.go
 - 输出文件命名为原文件名+_subInside.mp4
 
 **参数说明：**
+
 - `--root`: 视频和字幕文件所在目录（默认: /data）
 
 ## 查看帮助信息
@@ -108,6 +113,7 @@ go build -o main main.go
 ## 工作流程示例
 
 完整的双语字幕生成流程：
+
 ```bash
 # 1. 下载视频
 ./main download --link links.txt
