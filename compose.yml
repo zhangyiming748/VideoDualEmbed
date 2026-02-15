@@ -1,21 +1,7 @@
 services:
-  ytdlp:
+  VideoDualEmbed:
     image: ${IMAGE}
-    container_name: ytdlp
-    volumes:
-      - ./:/data
-    environment:
-      - PROXY=${PROXY}
-  whisper:
-    image: ${IMAGE}
-    container_name: whisper
-    volumes:
-      - ./:/data
-    environment:
-      - PROXY=${PROXY}
-  translate:
-    image: ${IMAGE}
-    container_name: translate
+    container_name: VideoDualEmbed
     volumes:
       - ./:/data
     environment:

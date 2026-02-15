@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os/exec"
 	"path/filepath"
 	"strings"
 
@@ -15,6 +14,7 @@ import (
 	"github.com/zhangyiming748/FastTranslate"
 	"github.com/zhangyiming748/FastWhisper"
 	"github.com/zhangyiming748/FastYtdlp"
+	"github.com/zhangyiming748/archive"
 	"github.com/zhangyiming748/finder"
 	"github.com/zhangyiming748/lumberjack"
 )
@@ -166,8 +166,8 @@ func merge(root string) {
 		srt := strings.Replace(video, filepath.Ext(video), ".srt", 1)
 		if exist(srt) {
 			log.Printf("视频文件:%v存在对应的字幕文件:%v\n", video, srt)
-			if err := ffmpeg(video, srt); err != nil {
-				log.Printf("此次转换出现错误:%v\n",err)
+			if err := archive.MergeMp4WithSameNameSrt(video, srt); err != nil {
+				log.Printf("此次转换出现错误:%v\n", err)
 				continue
 			} else {
 				os.Remove(video)
@@ -210,19 +210,4 @@ func exist(fp string) bool {
 		return false
 	}
 	return !info.IsDir()
-}
-
-func ffmpeg(video, srt string) error {
-	var cmd *exec.Cmd
-	args := []string{"-i", video}
-	args = append(args, "-vf", "subtitles="+srt)
-	args = append(args, "-c:v", "libx265")
-	args = append(args, "-tag:v", "hvc1")
-	args = append(args, "-c:a", "aac")
-	output := strings.Replace(srt, filepath.Ext(srt), "_subInside.mp4", 1)
-	args = append(args, output)
-	cmd = exec.Command("ffmpeg", args...)
-	log.Printf("当前生成的内嵌字幕的命令是:%v\n", cmd.String())
-	_, err := cmd.CombinedOutput()
-	return err
 }

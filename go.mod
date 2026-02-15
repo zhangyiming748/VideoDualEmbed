@@ -1,4 +1,4 @@
-module yt-whisper-bilingual
+module VideoDualEmbed
 
 go 1.25.7
 
@@ -7,6 +7,7 @@ require (
 	github.com/zhangyiming748/FastTranslate v0.1.1
 	github.com/zhangyiming748/FastWhisper v0.1.1
 	github.com/zhangyiming748/FastYtdlp v0.4.0
+	github.com/zhangyiming748/archive v0.0.16
 	github.com/zhangyiming748/lumberjack v0.0.1
 )
 
@@ -15,6 +16,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
+	github.com/zhangyiming748/FastMediaInfo v0.0.7 // indirect
 )
 
 require (
