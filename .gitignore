@@ -8,3 +8,6 @@ model_config.json
 *.mp4
 *.webm
 *.log
+dummy.*
+models
+main

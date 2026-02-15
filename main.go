@@ -43,9 +43,9 @@ var (
 func main() {
 	setLog()
 	var rootCmd = &cobra.Command{
-		Use:   "yt-whisper-bilingual",
+		Use:   "VideoDualEmbed",
 		Short: "YouTube双语字幕生成工具",
-		Long:  `一个自动化工具，用于从YouTube视频生成双语SRT字幕文件`,
+		Long:  `一个自动化工具,用于从YouTube视频生成双语SRT字幕文件`,
 	}
 
 	// Download 子命令
