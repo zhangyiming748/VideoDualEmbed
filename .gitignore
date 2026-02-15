@@ -5,3 +5,6 @@
 *.pt
 model_config.json
 .idea
+*.mp4
+*.webm
+*.log
