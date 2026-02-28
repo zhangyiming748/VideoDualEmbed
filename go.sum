@@ -53,6 +53,8 @@ github.com/zhangyiming748/FastTranslate v0.1.1 h1:8y/JS3iKctLtl/JS6g4aWxT2tMXEiz
 github.com/zhangyiming748/FastTranslate v0.1.1/go.mod h1:7AETGDI3aYyvV9jNt2tybIJXOIo2wnOoK5Y3T7Uhk/A=
 github.com/zhangyiming748/FastWhisper v0.1.1 h1:FlWxq1YtjkTGow6NDOiTJW1gCU/QkozicFNLSqo21Pg=
 github.com/zhangyiming748/FastWhisper v0.1.1/go.mod h1:ewWc33UfcKvI9kzQ0JdyWye23tU/Gz/wq4HpYMelcvk=
+github.com/zhangyiming748/FastWhisper v0.1.2 h1:Mfyyn7qkvP/D6LtttNNXXpadvckJEfACuZ+ETSurDvY=
+github.com/zhangyiming748/FastWhisper v0.1.2/go.mod h1:ewWc33UfcKvI9kzQ0JdyWye23tU/Gz/wq4HpYMelcvk=
 github.com/zhangyiming748/FastYtdlp v0.4.0 h1:aCZr9CDlVpPCipMONfCD3ZOTCK/GjaIYJ7pydWxM1j0=
 github.com/zhangyiming748/FastYtdlp v0.4.0/go.mod h1:v9eBxuMJZ0b3TxJqxL2T2pGLugqIG7YiJqEEYHAM13k=
 github.com/zhangyiming748/archive v0.0.16 h1:dXWlnVYvRaEWL++YeEjjpVmSS6YCr1Q6D1Y5p+ie4vw=
