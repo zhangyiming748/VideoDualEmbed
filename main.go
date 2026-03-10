@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"bufio"
+
+	"github.com/zhangyiming748/GracefullyExit"
+	"io"
 	"log"
+	"os"
 	"path/filepath"
 	"strings"
-
-	"io"
-	"os"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -51,16 +52,17 @@ func main() {
 	// Download 子命令
 	var downloadCmd = &cobra.Command{
 		Use:   "download",
-		Short: "下载YouTube视频",
-		Long:  `使用ytdlp下载指定URL的视频`,
+		Short: "下载 YouTube 视频",
+		Long:  `使用 ytdlp 下载指定 URL 的视频`,
 		Run: func(cmd *cobra.Command, args []string) {
-			download(link, proxy, cookie)
+			download(root, link, proxy, cookie)
 		},
 	}
 
-	downloadCmd.Flags().StringVar(&link, "link", "", "需要使用ytdlp下载的全部连接的列表文件路径 (必填)")
+	downloadCmd.Flags().StringVar(&root, "root", "./", "视频保存的根目录 (默认：./)")
+	downloadCmd.Flags().StringVar(&link, "link", "", "需要使用 ytdlp 下载的全部连接的列表文件路径 (必填)")
 	downloadCmd.Flags().StringVar(&proxy, "proxy", "", "下载过程中使用的代理")
-	downloadCmd.Flags().StringVar(&cookie, "cookie", "", "下载过程中需要提供的cookie的文件路径")
+	downloadCmd.Flags().StringVar(&cookie, "cookie", "", "下载过程中需要提供的 cookie 的文件路径")
 	downloadCmd.MarkFlagRequired("link")
 
 	// Whisper 子命令
@@ -114,22 +116,35 @@ func main() {
 	}
 }
 
-func download(link, proxy, cookie string) {
-	fmt.Printf("开始下载视频...\n")
-	fmt.Printf("链接文件: %s\n", link)
-	fmt.Printf("代理设置: %s\n", proxy)
-	fmt.Printf("Cookie文件: %s\n", cookie)
-	FastYtdlp.Download(link, proxy, cookie)
+func download(root, link, proxy, cookie string) {
+	ge := GracefullyExit.New()
+	defer ge.Stop()
+	log.Printf("开始下载视频...\n")
+	log.Printf("url链接文件: %s\n", link)
+	log.Printf("代理设置: %s\n", proxy)
+	log.Printf("Cookie文件: %s\n", cookie)
+	lines := readByLine(link)
+	for i, line := range lines {
+		log.Printf("开始下载第%d个文件", i+1)
+		FastYtdlp.Download(root, line, proxy, cookie)
+		log.Printf("第%d个文件下载完成", i+1)
+		if ge.ShouldExit("q") {
+			log.Println("Exit signal received. Quitting after current operation.")
+			break
+		}
+	}
+
 }
 
 func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
-	fmt.Printf("开始生成字幕...\n")
-	fmt.Printf("模型等级: %s\n", ModelType)
-	fmt.Printf("模型位置: %s\n", ModelDir)
-	fmt.Printf("视频语言: %s\n", Language)
-	fmt.Printf("视频目录: %s\n", VideoRoot)
-	fmt.Printf("字幕格式: %s\n", SubtitleFormat)
-
+	ge := GracefullyExit.New()
+	defer ge.Stop()
+	log.Printf("开始生成字幕...\n")
+	log.Printf("模型等级: %s\n", ModelType)
+	log.Printf("模型位置: %s\n", ModelDir)
+	log.Printf("视频语言: %s\n", Language)
+	log.Printf("视频目录: %s\n", VideoRoot)
+	log.Printf("字幕格式: %s\n", SubtitleFormat)
 	videos := finder.FindAllVideos(VideoRoot)
 	for _, video := range videos {
 		fc := new(FastWhisper.WhisperConfig)
@@ -140,20 +155,29 @@ func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
 		fc.Format = SubtitleFormat
 		// 调用获取字幕的方法
 		FastWhisper.GetSubtitle(fc)
+		if ge.ShouldExit("q") {
+			log.Println("Exit signal received. Quitting after current operation.")
+			break
+		}
 	}
 }
 
 func trans(SrtRoot, proxy string) {
-	fmt.Printf("开始翻译字幕...\n")
-	fmt.Printf("字幕目录: %s\n", SrtRoot)
-	fmt.Printf("代理设置: %s\n", proxy)
-
+	ge := GracefullyExit.New()
+	defer ge.Stop()
+	log.Printf("开始翻译字幕...\n")
+	log.Printf("字幕目录: %s\n", SrtRoot)
+	log.Printf("代理设置: %s\n", proxy)
 	srts := finder.FindAllFiles(SrtRoot)
 	for _, srt := range srts {
 		if strings.HasSuffix(srt, "origin.srt") {
 			continue
 		} else if strings.HasSuffix(srt, ".srt") {
 			FastTranslate.TranslateSrt(srt, proxy)
+		}
+		if ge.ShouldExit("q") {
+			log.Println("Exit signal received. Quitting after current operation.")
+			break
 		}
 	}
 }
@@ -210,4 +234,27 @@ func exist(fp string) bool {
 		return false
 	}
 	return !info.IsDir()
+}
+
+func readByLine(fp string) []string {
+	lines := []string{}
+	fi, err := os.Open(fp)
+	if err != nil {
+		log.Printf("Error: %s\n按行读文件出错\n", err)
+		return []string{}
+	}
+	defer fi.Close()
+
+	br := bufio.NewReader(fi)
+	for {
+		a, _, c := br.ReadLine()
+		if c == io.EOF {
+			break
+		}
+		if strings.HasPrefix(string(a), "#") {
+			continue
+		}
+		lines = append(lines, string(a))
+	}
+	return lines
 }
