@@ -55,8 +55,8 @@ github.com/zhangyiming748/FastWhisper v0.1.2 h1:Mfyyn7qkvP/D6LtttNNXXpadvckJEfAC
 github.com/zhangyiming748/FastWhisper v0.1.2/go.mod h1:ewWc33UfcKvI9kzQ0JdyWye23tU/Gz/wq4HpYMelcvk=
 github.com/zhangyiming748/FastYtdlp v0.5.0 h1:+iWpEPR61Kyo1d5zBpuS1lflw5Ekw7+PH0WdO5g5qfk=
 github.com/zhangyiming748/FastYtdlp v0.5.0/go.mod h1:v9eBxuMJZ0b3TxJqxL2T2pGLugqIG7YiJqEEYHAM13k=
-github.com/zhangyiming748/GracefullyExit v0.1.2 h1:I/5GmkAb0wniuhYBEbnqoZjlh9jxy4KvOI5ZsEGXDRg=
-github.com/zhangyiming748/GracefullyExit v0.1.2/go.mod h1:ktsDYmQ6K+lnFctelSZvQe7sdDj+3APF3c5hESiljjY=
+github.com/zhangyiming748/GracefullyExit v0.2.0 h1:4Ivgq2ZfMezW6scBNf2jw3HWj7GRTcw5lFGmqQjPFuo=
+github.com/zhangyiming748/GracefullyExit v0.2.0/go.mod h1:ktsDYmQ6K+lnFctelSZvQe7sdDj+3APF3c5hESiljjY=
 github.com/zhangyiming748/archive v0.0.20 h1:S5i0XX9fsU6xC/nCtJYgb/4vEAp/nU5BAnBWkBKZk90=
 github.com/zhangyiming748/archive v0.0.20/go.mod h1:WIL8HTrYIvI8/a9YAS/7syfb/1Fb91RYn1eKAvwqvhM=
 github.com/zhangyiming748/finder v0.0.7 h1:bL9UrQbp6CTdZ7Z6zcQ9slqbM0Ty6tlB2iIL6BzmFjY=

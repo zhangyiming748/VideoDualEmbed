@@ -7,7 +7,7 @@ require (
 	github.com/zhangyiming748/FastTranslate v0.1.4
 	github.com/zhangyiming748/FastWhisper v0.1.2
 	github.com/zhangyiming748/FastYtdlp v0.5.0
-	github.com/zhangyiming748/GracefullyExit v0.1.2
+	github.com/zhangyiming748/GracefullyExit v0.2.0
 	github.com/zhangyiming748/archive v0.0.20
 	github.com/zhangyiming748/lumberjack v0.0.1
 )

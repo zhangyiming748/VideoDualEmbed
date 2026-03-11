@@ -110,6 +110,7 @@ func main() {
 	rootCmd.AddCommand(whisperCmd)
 	rootCmd.AddCommand(transCmd)
 
+	GracefullyExit.StartReceivedExit()
 	// 执行命令
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalf("命令运行出现致命错误:%v\n", err)
@@ -117,8 +118,6 @@ func main() {
 }
 
 func download(root, link, proxy, cookie string) {
-	ge := GracefullyExit.New()
-	defer ge.Stop()
 	log.Printf("开始下载视频...\n")
 	log.Printf("url链接文件: %s\n", link)
 	log.Printf("代理设置: %s\n", proxy)
@@ -128,7 +127,7 @@ func download(root, link, proxy, cookie string) {
 		log.Printf("开始下载第%d个文件", i+1)
 		FastYtdlp.Download(root, line, proxy, cookie)
 		log.Printf("第%d个文件下载完成", i+1)
-		if ge.ShouldExit("q") {
+		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
 			break
 		}
@@ -137,8 +136,6 @@ func download(root, link, proxy, cookie string) {
 }
 
 func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
-	ge := GracefullyExit.New()
-	defer ge.Stop()
 	log.Printf("开始生成字幕...\n")
 	log.Printf("模型等级: %s\n", ModelType)
 	log.Printf("模型位置: %s\n", ModelDir)
@@ -155,7 +152,7 @@ func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
 		fc.Format = SubtitleFormat
 		// 调用获取字幕的方法
 		FastWhisper.GetSubtitle(fc)
-		if ge.ShouldExit("q") {
+		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
 			break
 		}
@@ -163,8 +160,6 @@ func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
 }
 
 func trans(SrtRoot, proxy string) {
-	ge := GracefullyExit.New()
-	defer ge.Stop()
 	log.Printf("开始翻译字幕...\n")
 	log.Printf("字幕目录: %s\n", SrtRoot)
 	log.Printf("代理设置: %s\n", proxy)
@@ -175,7 +170,7 @@ func trans(SrtRoot, proxy string) {
 		} else if strings.HasSuffix(srt, ".srt") {
 			FastTranslate.TranslateSrt(srt, proxy)
 		}
-		if ge.ShouldExit("q") {
+		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
 			break
 		}
