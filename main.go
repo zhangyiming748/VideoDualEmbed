@@ -110,7 +110,7 @@ func main() {
 	rootCmd.AddCommand(whisperCmd)
 	rootCmd.AddCommand(transCmd)
 
-	GracefullyExit.StartReceivedExit()
+	go GracefullyExit.StartReceivedExit()
 	// 执行命令
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalf("命令运行出现致命错误:%v\n", err)
