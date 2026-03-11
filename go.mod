@@ -7,8 +7,8 @@ require (
 	github.com/zhangyiming748/FastTranslate v0.1.4
 	github.com/zhangyiming748/FastWhisper v0.1.2
 	github.com/zhangyiming748/FastYtdlp v0.5.0
-	github.com/zhangyiming748/GracefullyExit v0.1.0
-	github.com/zhangyiming748/archive v0.0.17
+	github.com/zhangyiming748/GracefullyExit v0.1.2
+	github.com/zhangyiming748/archive v0.0.20
 	github.com/zhangyiming748/lumberjack v0.0.1
 )
 
@@ -34,13 +34,12 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/schollz/progressbar/v3 v3.19.0 // indirect
 	github.com/zhangyiming748/finder v0.0.7
-	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a // indirect
-	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/term v0.40.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
 	gorm.io/gorm v1.31.1 // indirect
-	modernc.org/libc v1.67.7 // indirect
+	modernc.org/libc v1.70.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.45.0 // indirect
+	modernc.org/sqlite v1.46.1 // indirect
 )
