@@ -129,7 +129,7 @@ func download(root, link, proxy, cookie string) {
 		log.Printf("第%d个文件下载完成", i+1)
 		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
-			break
+			os.Exit(0)
 		}
 	}
 
@@ -154,7 +154,7 @@ func whisper(ModelType, ModelDir, Language, VideoRoot, SubtitleFormat string) {
 		FastWhisper.GetSubtitle(fc)
 		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
-			break
+			os.Exit(0)
 		}
 	}
 }
@@ -172,7 +172,7 @@ func trans(SrtRoot, proxy string) {
 		}
 		if GracefullyExit.ShouldExit() {
 			log.Println("Exit signal received. Quitting after current operation.")
-			break
+			os.Exit(0)
 		}
 	}
 }
@@ -195,6 +195,10 @@ func merge(root string) {
 		} else {
 			log.Printf("视频文件:%v不存在对应的字幕文件:%v\n", video, srt)
 			continue
+		}
+		if GracefullyExit.ShouldExit() {
+			log.Println("Exit signal received. Quitting after current operation.")
+			os.Exit(0)
 		}
 	}
 }
