@@ -7,6 +7,13 @@ services:
     environment:
       - PROXY=${PROXY}
   whisper:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     image: ${IMAGE}
     container_name: whisper
     volumes:
